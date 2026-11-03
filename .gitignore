@@ -1,0 +1,18 @@
+# Generated apps and installers
+*.app/
+dist/
+*.dmg
+*.zip
+
+# Local development data
+.DS_Store
+.build/
+work/
+backups/
+*.log
+*.tmp
+__pycache__/
+VALIDATION.md
+preferences*.json
+.env
+.env.*
