@@ -390,6 +390,7 @@ final class Controller: NSObject, NSApplicationDelegate, NSSearchFieldDelegate, 
     var transitionID = 0
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        AppUpdater.shared.start()
         let backgroundLaunch = LaunchContext.isBackground(NSAppleEventManager.shared().currentAppleEvent)
         if let url = Bundle.main.url(forResource: "AppIcon", withExtension: "icns") {
             NSApp.applicationIconImage = NSImage(contentsOf: url)
@@ -429,6 +430,7 @@ final class Controller: NSObject, NSApplicationDelegate, NSSearchFieldDelegate, 
         for (title, sel, key) in [("剪切", "cut:", "x"), ("拷贝", "copy:", "c"), ("粘贴", "paste:", "v"), ("全选", "selectAll:", "a")] {
             editMenu.addItem(NSMenuItem(title: title, action: Selector(sel), keyEquivalent: key))
         }
+        MainActor.assumeIsolated { appMenu.insertItem(AppUpdater.shared.menuItem(), at: 2) }
         NSApp.mainMenu = main
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         statusItem.button?.image = NSImage(systemSymbolName: "square.grid.3x3.fill", accessibilityDescription: "LaunchDeck")
@@ -438,6 +440,7 @@ final class Controller: NSObject, NSApplicationDelegate, NSSearchFieldDelegate, 
         menu.addItem(action("刷新应用列表", #selector(refresh), key: ""))
         menu.addItem(action("设置…", #selector(showSettings), key: ""))
         menu.addItem(.separator()); menu.addItem(action("退出 LaunchDeck", #selector(quit), key: ""))
+        MainActor.assumeIsolated { menu.insertItem(AppUpdater.shared.menuItem(), at: 3) }
         statusItem.menu = menu
     }
     func action(_ title: String, _ selector: Selector, key: String) -> NSMenuItem {

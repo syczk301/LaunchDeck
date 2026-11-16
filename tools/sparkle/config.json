@@ -1,0 +1,9 @@
+{
+  "app": "LaunchDeck",
+  "account": "syczk301.LaunchDeck",
+  "publicKey": "wQWspmIkcG/4VyxN/DXXNqBb6Z4qNOWmaABQJpIpcq4=",
+  "feedURL": "https://github.com/syczk301/LaunchDeck/releases/download/sparkle/appcast.xml",
+  "downloadURLPrefix": "https://github.com/syczk301/LaunchDeck/releases/download/sparkle/",
+  "version": "1.1.0",
+  "bundle": "LaunchDeck.app"
+}
